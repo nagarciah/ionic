@@ -1,0 +1,17 @@
+.questionResultView {
+  text-align: center;
+}
+
+.resultIconRightAnswer {
+  font-size: 100px;
+  color: green;
+}
+
+.resultIconWrongAnswer {
+  font-size: 100px;
+  color: red;
+}
+
+.with-bottom-padding{
+  margin-bottom: 15px;
+}

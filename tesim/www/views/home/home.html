@@ -1,0 +1,31 @@
+<ion-view view-title="Test Simulator">
+
+	<ion-content class="cards-bg">
+
+		<div class="list card">
+			<div class="item item-divider">
+				<i class="icon ion-help questionLabel"></i>
+				{{question.text}}
+			</div>
+
+			<div class="item item-text-wrap" ng-repeat="option in question.options"
+			ng-click="answerSelected(option)">
+			<span class="answerLabel">{{option.label}}</span>{{option.text}}
+		</div>
+	</div>
+
+	<p class="myAnswer">Mi respuesta: {{answer ? answer : '(sin seleccionar)'}}</p>
+	<button class="button button-block button-positive" ng-click="checkAnswer($event)" ng-if="answer">
+		Confirmar <i class="icon ion-play"></i>
+	</button>
+
+	<!--
+	<ion-list>
+	<ion-radio ng-model="choice" ng-value="'A'">Radio buttons let the user select one option in a set of options, unlike a checkbox which allows for multiple selections. </ion-radio>
+	<ion-radio ng-model="choice" ng-value="'A'">Choose A</ion-radio>
+	<ion-radio ng-model="choice" ng-value="'A'">Choose A</ion-radio>
+	<ion-radio ng-model="choice" ng-value="'A'">Choose A</ion-radio>
+</ion-list>
+-->
+</ion-content>
+</ion-view>

@@ -1,0 +1,21 @@
+<<ion-view title="{{result.title}}" class="questionResultView">
+  <ion-content>
+    <h2 ng-if="result.isRight"><i class="icon ion-checkmark-circled resultIconRightAnswer"></i></h2>
+    <h2 ng-if="!result.isRight"><i class="icon ion-close-circled resultIconWrongAnswer"></i></h2>
+
+    <button class="button button-positive with-bottom-padding" ng-click="nextQuestion($event)">
+  		Siguiente <i class="icon ion-play"></i>
+  	</button>
+
+    <ion-list>
+      <ion-item class="item-divider">Puntajes acumulados</ion-item>
+      <ion-item class="item-avatar item-icon-right" ng-repeat="pr in ranking" type="item-text-wrap" href="#/people/results/{{pr.userId}}">
+        <img ng-src="{{getIcon(pr.ranking)}}">
+        <h2>{{pr.name}}</h2>
+        <p>{{pr.score}}</p>
+        <span class="badge badge-assertive">{{pr.score}}</span>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
