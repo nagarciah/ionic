@@ -21,13 +21,15 @@ angular.module('app')
   });
 
   // TODO Cambiar por un filtro
-  $scope.getIcon = function(ranking){
+ /*$scope.getIcon = function(peopleScore){
+    var ranking = peopleScore.ranking;
+
     if(ranking < 4){
       return "../../img/ranking_" + ranking + ".svg";
     }else{
       return "/img/no-ranking.svg";
     }
-  };
+  };*/
 
   $scope.nextQuestion = function (){
     QuestionsService.moveToNextQuestion();

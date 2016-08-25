@@ -1,4 +1,4 @@
-<ion-view view-title="Test Simulator">
+<ion-view view-title="Test Simulator" class="homeView">
 
 	<ion-content class="cards-bg">
 
@@ -15,7 +15,7 @@
 	</div>
 
 	<p class="myAnswer">Mi respuesta: {{answer ? answer : '(sin seleccionar)'}}</p>
-	<button class="button button-block button-positive" ng-click="checkAnswer($event)" ng-if="answer">
+	<button class="button button-positive" ng-click="checkAnswer($event)" ng-if="answer">
 		Confirmar <i class="icon ion-play"></i>
 	</button>
 

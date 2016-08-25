@@ -1,4 +1,4 @@
-<<ion-view title="{{result.title}}" class="questionResultView">
+<ion-view title="{{result.title}}" class="questionResultView">
   <ion-content>
     <h2 ng-if="result.isRight"><i class="icon ion-checkmark-circled resultIconRightAnswer"></i></h2>
     <h2 ng-if="!result.isRight"><i class="icon ion-close-circled resultIconWrongAnswer"></i></h2>
@@ -9,12 +9,14 @@
 
     <ion-list>
       <ion-item class="item-divider">Puntajes acumulados</ion-item>
-      <ion-item class="item-avatar item-icon-right" ng-repeat="pr in ranking" type="item-text-wrap" href="#/people/results/{{pr.userId}}">
-        <img ng-src="{{getIcon(pr.ranking)}}">
+      <ion-item class="item-avatar item-icon-left" ng-repeat="pr in ranking" type="item-text-wrap" href="#/people/results/{{pr.userId}}">
+        <!--<img ng-src="{{getIcon(pr.ranking)}}">-->
+        <i class="icon ng-class:{ 'ion-checkmark-circled resultIconRightAnswer' : pr.lastOneWasCorrect, 'ion-close-circled resultIconWrongAnswer': !pr.lastOneWasCorrect }"></i>
         <h2>{{pr.name}}</h2>
-        <p>{{pr.score}}</p>
-        <span class="badge badge-assertive">{{pr.score}}</span>
-        <i class="icon ion-chevron-right icon-accessory"></i>
+        <p>{{pr.totalScore}}</p>
+        <span class="badge badge-assertive">{{pr.totalScore}}</span>
+        <!--<i class="icon ion-chevron-right icon-accessory"></i>-->
+        </div>
       </ion-item>
     </ion-list>
   </ion-content>
