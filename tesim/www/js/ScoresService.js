@@ -7,15 +7,17 @@ score = {
 }
 */
 angular.module('app')
-.factory('ScoresService', function(UserService, _, $firebaseArray){
+.factory('ScoresService', function(UserService, _, RepositoryService){
   // TODO Usar repositorio para inicializar marcadores
-  var scores = [{
+  var scores = RepositoryService.scores;
+
+  /*[{
     question: '',
     answer: 'A',
     user: {name: 'Carlos', id: 'email'},
     score: 0.5,
     correctAnswer: true
-  }];
+  }];*/
 
   var _updateScore = function(score){
     //TODO Usar repositorio para actualizar el marcador
@@ -45,7 +47,8 @@ angular.module('app')
       previousScore.score = score.score;
     }else{
       //scores.$add(score);
-      scores.push(score);
+      //scores.push(score);
+      RepositoryService.add(score);
     }
   };
 
