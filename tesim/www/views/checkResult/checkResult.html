@@ -1,11 +1,13 @@
 <ion-view title="{{result.title}}" class="questionResultView">
   <ion-content>
-    <h2 ng-if="result.isRight"><i class="icon ion-checkmark-circled resultIconRightAnswer"></i></h2>
-    <h2 ng-if="!result.isRight"><i class="icon ion-close-circled resultIconWrongAnswer"></i></h2>
+    <div class="centeredView">
+      <h2 ng-if="result.isRight"><i class="icon ion-checkmark-circled resultIconRightAnswer"></i></h2>
+      <h2 ng-if="!result.isRight"><i class="icon ion-close-circled resultIconWrongAnswer"></i></h2>
 
-    <button class="button button-positive with-bottom-padding" ng-click="nextQuestion($event)">
-  		Siguiente <i class="icon ion-play"></i>
-  	</button>
+      <button class="button button-positive with-bottom-padding" ng-click="nextQuestion($event)">
+    		Siguiente <i class="icon ion-play"></i>
+    	</button>
+    </div>
 
     <ion-list>
       <ion-item class="item-divider">Puntajes acumulados</ion-item>
@@ -14,7 +16,7 @@
         <i class="icon ng-class:{ 'ion-checkmark-circled resultIconRightAnswer' : pr.lastOneWasCorrect, 'ion-close-circled resultIconWrongAnswer': !pr.lastOneWasCorrect }"></i>
         <h2>{{pr.name}}</h2>
         <p>{{pr.totalScore}}</p>
-        <span class="badge badge-assertive">{{pr.totalScore}}</span>
+        <span class="badge badge-assertive">{{pr.totalScore|percentage}}</span>
         <!--<i class="icon ion-chevron-right icon-accessory"></i>-->
         </div>
       </ion-item>

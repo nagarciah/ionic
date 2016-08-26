@@ -6,16 +6,29 @@ score = {
   score: int
 }
 */
-angular.module('app')
-.factory('ScoresService', function(UserService, _){
+angular.module('app'/*, ['firebase']*/)
+.factory('ScoresService', function(UserService, _, $firebaseArray){
   // TODO Usar fireBase para inicializar marcadores
-  var scores = [{
+  // https://github.com/firebase/angularfire/blob/master/docs/quickstart.md
+  /*var scores = [{
     question: '',
     answer: 'A',
     user: {name: 'Carlos', id: 'email'},
     score: 0.5,
     correctAnswer: true
-  }];
+  }];*/
+
+  var scoresRef = new Firebase('https://tesim-e1738.firebaseio.com/scores');
+  var scores = $firebaseArray(scoresRef) || [];
+  /*var config = {
+    apiKey: "AIzaSyB8kHFGBaoysBV_933pGw_SIR5uiTywjQI",
+    authDomain: "tesim-e1738.firebaseapp.com",
+    databaseURL: "https://tesim-e1738.firebaseio.com",
+    storageBucket: "tesim-e1738.appspot.com",
+  };
+  firebase.initializeApp(config);
+  var scores = firebase.database().ref().child('scores');*/
+
 
   var _updateScore = function(score){
     //TODO Usar fireBase para actualizar el marcador
@@ -44,6 +57,7 @@ angular.module('app')
       previousScore.answer = score.answer;
       previousScore.score = score.score;
     }else{
+      //scores.$add(score);
       scores.push(score);
     }
   };
