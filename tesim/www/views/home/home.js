@@ -2,6 +2,8 @@ angular.module('app')
 
 .controller('HomeController', function($scope, $state, $stateParams, QuestionsService){
 
+  $scope.questions = QuestionsService.questions;
+
   $scope.$on('$ionicView.enter', function(){
     $scope.answer = null;
     $scope.question = getQuestion();
@@ -18,7 +20,7 @@ angular.module('app')
   function getQuestion(){
     var q;
     if($stateParams.questionIndex){
-      q = QuestionsService.questions[questionIndex];
+      q = QuestionsService.questions[$stateParams.questionIndex];
     }else{
       q = QuestionsService.getCurrentQuestion();
     }

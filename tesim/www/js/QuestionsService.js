@@ -1,38 +1,43 @@
 angular.module('app')
-.factory('QuestionsService', function(){
-  var questions = [];
+.factory('QuestionsService', function($firebaseArray, $rootScope){
+  var ref = firebase.database().ref().child("questions");
+  var _questions = $firebaseArray(ref);
 
-  for(var i=0; i<5; i++){
-    var question = {
-      id: i,
-      text: 'Pregunta ' + i,
-      answer: 'A',
-      score: 1,
-      options: [
-        {label: 'A', text: 'Primera opción de la pregunta ' + i },
-        {label: 'B', text: 'Segunda opción de la pregunta ' + i},
-        {label: 'C', text: 'Tercera opción de la pregunta ' + i},
-        {label: 'D', text: 'Cuarta opción de la pregunta ' + i}
-      ]
-    };
+  var _createQuestions = function(){
+    for(var i=0; i<5; i++){
+      var question = {
+        id: i,
+        text: 'Pregunta ' + i,
+        answer: 'A',
+        score: 1,
+        options: [
+          {label: 'A', text: 'Primera opción de la pregunta ' + i },
+          {label: 'B', text: 'Segunda opción de la pregunta ' + i},
+          {label: 'C', text: 'Tercera opción de la pregunta ' + i},
+          {label: 'D', text: 'Cuarta opción de la pregunta ' + i}
+        ]
+      };
+      _questions.$add(question);
+    }
+  };
 
-    questions.push(question);
-  }
-
-
+  // Evento para actualizar variable al finalizar el llamado asincrono
+  ref.on("value", function(snapshot) {
+      _questions = snapshot.val();
+  });
 
   return {
-    questions: questions,
+    questions: _questions,
     questionIndex: 0,
     moveToNextQuestion: function(){
       this.questionIndex++;
-      if(this.questionIndex===this.questions.length){
+      if(this.questionIndex === _questions.length){
         this.questionIndex = 0;
       }
     },
 
     getCurrentQuestion: function(){
-      return this.questions[ this.questionIndex ];
+      return _questions[ this.questionIndex ];
     }
   };
 });
