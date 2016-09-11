@@ -1,6 +1,6 @@
 angular.module('app')
 
-.controller('HomeController', function($scope, $state, $stateParams, QuestionsService){
+.controller('HomeController', function($scope, $state, $stateParams, QuestionsService, ScoresService){
 
   $scope.questions = QuestionsService.questions;
 
@@ -14,6 +14,16 @@ angular.module('app')
   };
 
   $scope.checkAnswer = function($event){
+/*
+    ScoresService
+      .waitForOthers()
+      .then(function(data){
+          $state.go('checkResult', {answer: $scope.answer});
+      })
+      .catch(function(err){
+
+      });
+*/
     $state.go('checkResult', {answer: $scope.answer});
   };
 

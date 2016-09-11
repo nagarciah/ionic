@@ -1,7 +1,7 @@
 angular.module('app')
 .factory('QuestionsService', function($firebaseArray, $rootScope){
-  var ref = firebase.database().ref().child("questions");
-  var _questions = $firebaseArray(ref);
+  //var ref = firebase.database().ref().child("questions");
+  var _questions = [];//$firebaseArray(ref);
 
   var _createQuestions = function(){
     for(var i=0; i<5; i++){
@@ -17,14 +17,16 @@ angular.module('app')
           {label: 'D', text: 'Cuarta opción de la pregunta ' + i}
         ]
       };
-      _questions.$add(question);
+      //_questions.$add(question);
+      _questions.push(question);
     }
   };
+  _createQuestions();
 
   // Evento para actualizar variable al finalizar el llamado asincrono
-  ref.on("value", function(snapshot) {
+  /*ref.on("value", function(snapshot) {
       _questions = snapshot.val();
-  });
+  });*/
 
   return {
     questions: _questions,

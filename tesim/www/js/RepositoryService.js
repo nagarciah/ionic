@@ -10,8 +10,8 @@ var rooms = {
 // https://github.com/firebase/angularfire/blob/master/docs/quickstart.md
 
 
-angular.module('app'/*, ['firebase']*/)
-.factory('RepositoryService', function(/*UserService, $scope, */$firebaseArray){
+angular.module('app')
+.factory('RepositoryService', function($firebaseArray){
   var rootRef = firebase.database().ref().child("scores");
   var _scores = $firebaseArray(rootRef);
 

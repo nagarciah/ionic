@@ -1,23 +1,17 @@
 /**
-score = {
-  question: Object
-  answer: string,
-  user: Object
-  score: int
-}
-*/
-angular.module('app')
-.factory('ScoresService', function(UserService, _, RepositoryService){
-  // TODO Usar repositorio para inicializar marcadores
-  var scores = RepositoryService.scores;
-
-  /*[{
+scores = [{
     question: '',
     answer: 'A',
     user: {name: 'Carlos', id: 'email'},
     score: 0.5,
     correctAnswer: true
-  }];*/
+  }];
+*/
+
+angular.module('app')
+.factory('ScoresService', function(UserService, _, RepositoryService){
+  // TODO Usar repositorio para inicializar marcadores
+  var _scores = RepositoryService.scores; //firebase
 
   var _updateScore = function(score){
     //TODO Usar repositorio para actualizar el marcador
@@ -34,8 +28,8 @@ angular.module('app')
 
     // Busca si ya se había respondido la pregunta
     var previousScore;
-    if(scores.lenght>0){
-      previousScore = _.find(scores, function(s){
+    if(_scores.lenght>0){
+      previousScore = _.find(_scores, function(s){
         return s.question.id === score.question.id;
       });
     }
@@ -46,15 +40,15 @@ angular.module('app')
       previousScore.answer = score.answer;
       previousScore.score = score.score;
     }else{
-      //scores.$add(score);
-      //scores.push(score);
-      RepositoryService.add(score);
+      //_scores.push(score);
+      RepositoryService.add(score); //firebase
     }
   };
 
+  // TODO Esta mostranlo los reslutados de la pregunta anterior
   var _getRanking = function (){
     // http://stackoverflow.com/questions/19547622/map-reducing-object-with-underscore/19602150#19602150
-    var totalScores = _.chain(scores)
+    var totalScores = _.chain(_scores)
     .groupBy(function(i) {
       return i.user.id;
     })
@@ -73,7 +67,7 @@ angular.module('app')
   };
 
   return {
-    scores: scores,
+    scores: _scores,
     update: _updateScore,
     getRanking: _getRanking
   };
